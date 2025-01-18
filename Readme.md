@@ -25,6 +25,28 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
         }
     }
    ```
-
-*Without Encapsulation, we would have declared `balance` as public, 
+    *Without Encapsulation, we would have declared `balance` as public, 
     thus we would not have control over what values the balance can have(negative or positive)*
+2. **Abstraction**  
+    It states that we should reduce complexity by hiding unnecessary details from the user.  
+    We make everything else private or abstracted from user and only expose necessary interface or functions.
+   ```java
+    public class MailService {
+       public void sendEmail() {
+           connect();
+           authenticate();
+           disconnect();
+       }
+       private void connect() {
+           System.out.println("Connected");
+       }
+       private void disconnect() {
+           System.out.println("Disconnected");
+       }
+       private void authenticate() {
+           System.out.println("Authenticated");
+       }
+    } 
+   ```
+   *We only expose `sendMail` method to the user and hide internally used functions like `connect`, `disconnect` etc.  
+    This helps to simplify usage for the end user as any unnecessary methods are hidden from user*  
