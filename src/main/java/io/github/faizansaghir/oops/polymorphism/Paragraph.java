@@ -1,4 +1,4 @@
-package io.github.faizansaghir.polymorphism;
+package io.github.faizansaghir.oops.polymorphism;
 
 public class Paragraph extends UIControl {
     public void displayText() {

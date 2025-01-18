@@ -1,4 +1,4 @@
-package io.github.faizansaghir.abstraction;
+package io.github.faizansaghir.oops.abstraction;
 
 public class MailService {
     public void sendEmail() {

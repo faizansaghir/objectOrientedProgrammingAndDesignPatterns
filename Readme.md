@@ -97,3 +97,16 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
     ***Compile Time Polymorphism***: It can be achieved by method overloading.  
     - When we have multiple functions with same function name but different number or type of parameters, 
          During function call, JVM will decide which function to call based on the number or type of parameters passed.  
+
+## SOLID Design Principles
+
+1. **Single Responsibility Principle**
+    It states that there should never be mote than one reason for a class to change.  
+    It means, a class provides very focused functionality and address a specific concern.  
+    - Say we have a class which is responsible to communicate with a server. It will change due to change in following.  
+      - Protocol change
+      - Message format change
+      - Authentication change  
+
+    *In the example code, we can see that `ControllerBad` may change if validation logic changes, or storage logic changes.
+    The `ControllerGood` does not hold validation or storage logic inside it thus it is less likely to be affected*

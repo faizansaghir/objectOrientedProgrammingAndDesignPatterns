@@ -1,4 +1,4 @@
-package io.github.faizansaghir.inheritance;
+package io.github.faizansaghir.oops.inheritance;
 
 public class InheritanceMain {
     public static void main(String[] args) {

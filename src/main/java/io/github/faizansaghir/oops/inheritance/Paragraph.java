@@ -1,4 +1,4 @@
-package io.github.faizansaghir.inheritance;
+package io.github.faizansaghir.oops.inheritance;
 
 public class Paragraph extends UIControl{
     public void displayText() {

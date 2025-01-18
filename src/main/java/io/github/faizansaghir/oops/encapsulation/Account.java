@@ -1,4 +1,4 @@
-package io.github.faizansaghir.encapsulation;
+package io.github.faizansaghir.oops.encapsulation;
 
 public class Account {
 

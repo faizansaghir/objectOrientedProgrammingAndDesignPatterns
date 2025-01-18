@@ -1,4 +1,4 @@
-package io.github.faizansaghir.polymorphism;
+package io.github.faizansaghir.oops.polymorphism;
 
 public class PolymorphismMain {
     public static void main(String[] args) {

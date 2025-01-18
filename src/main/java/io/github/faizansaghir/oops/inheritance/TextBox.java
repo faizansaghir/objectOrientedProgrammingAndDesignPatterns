@@ -1,4 +1,4 @@
-package io.github.faizansaghir.inheritance;
+package io.github.faizansaghir.oops.inheritance;
 
 public class TextBox extends UIControl{
     public void acceptInput() {
