@@ -50,3 +50,38 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
    ```
    *We only expose `sendMail` method to the user and hide internally used functions like `connect`, `disconnect` etc.  
     This helps to simplify usage for the end user as any unnecessary methods are hidden from user*  
+3. **Inheritance**  
+    It is principle which states that we should implement common code in a parent class and inherit those in our child class.  
+    This will reduce code duplication as well as development effort of re-writing same logic in every child class.
+    ```java
+    public class UIControl {
+        public void enable() {
+            System.out.println("Enabled");
+        }
+    }
+    
+    public class TextBox extends UIControl{
+        public void acceptInput() {
+            System.out.println("Accepting input");
+        }
+    }
+    
+    public class Paragraph extends UIControl{
+        public void displayText() {
+            System.out.println("Text displayed");
+        }
+    }
+   
+    public class InheritanceMain {
+        public static void main(String[] args) {
+            TextBox textBox = new TextBox();
+            textBox.enable();
+            textBox.acceptInput();
+            Paragraph paragraph = new Paragraph();
+            paragraph.enable();
+            paragraph.displayText();
+        }
+    }
+    ```
+   *We would have implemented `enable` method in both `TextBox` as well as `Paragraph`, 
+    but due to inheritance, we were able to skip redefining*
