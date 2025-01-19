@@ -119,4 +119,14 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
          and it contains only parts which will not be changed.*  
     - *The `calculateBill()` method is what is open for extension, any child class extending `Subscriber` 
        will modify this method, this keeps the base class unchanged while it is still open for extension.*
-git 
+3. **Liskov Substitution Principle**  
+    It states that we should be able to substitute a base class object with an object of a child class.  
+    It not only means simple type substitution, but it also expects same behavior from child class object as expected from parent class object.  
+    Say a `JsonStringifySorted` class has a method `stringify` which returns a JSON string in alphabetically sorted order, 
+    then the child class should also on using `stringify` method should return the result in alphabetically sorted order.  
+    <em>In the code example `Square` is violating Liskov Substitution Principle in the following ways
+    - When we set width of any rectangle, we should get back the same value unless we reset the width  
+    - When we set height of any rectangle, we should get back the same value unless we reset the height
+    - When we get the area of any rectangle, it should be `width*height` which was set and not `side*side`
+
+    This issue occurred as we did not create the correct Parent Child relationship by choosing wrong classes for the relationship</em>
