@@ -138,3 +138,8 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
     - If a class has empty method implementations
     - If a class has all the methods implemented, but some of them throw `UnsupportedOperationException` or something similar
     - Method implementation return null or default/dummy values.
+     
+    *In the code examples, in good implementation of `EntityPersistenceService`, 
+    we only include those functionalities to be implemented which are relevant to any class 
+    that will implement the `EntityPersistenceService` interface. While in bad implementation of `EntityPersistenceService` 
+    we included `List<T> getByName(String name)` which is bot relevant to `OrderPersistenceService`, thus breaking functionality*
