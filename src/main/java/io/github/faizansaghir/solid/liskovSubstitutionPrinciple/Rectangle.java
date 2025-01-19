@@ -1,4 +1,4 @@
-package io.github.faizansaghir.liskovSubstitutionPrinciple;
+package io.github.faizansaghir.solid.liskovSubstitutionPrinciple;
 
 public class Rectangle {
     private int width;

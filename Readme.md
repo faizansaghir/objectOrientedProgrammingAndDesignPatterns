@@ -130,3 +130,11 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
     - When we get the area of any rectangle, it should be `width*height` which was set and not `side*side`
 
     This issue occurred as we did not create the correct Parent Child relationship by choosing wrong classes for the relationship</em>
+4. **Interface Segregation Principle**  
+    This states that the client should not be forced to implement an interface that it does not use.  
+    This means that any interface or abstract class should have only those methods that are relevant to it.  
+    If any method is not relevant to the interface, then it should be moved to a separate interface.  
+    To identify violation of this principle, we can check the following:  
+    - If a class has empty method implementations
+    - If a class has all the methods implemented, but some of them throw `UnsupportedOperationException` or something similar
+    - Method implementation return null or default/dummy values.
