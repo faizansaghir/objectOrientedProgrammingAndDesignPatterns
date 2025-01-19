@@ -143,3 +143,11 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
     we only include those functionalities to be implemented which are relevant to any class 
     that will implement the `EntityPersistenceService` interface. While in bad implementation of `EntityPersistenceService` 
     we included `List<T> getByName(String name)` which is bot relevant to `OrderPersistenceService`, thus breaking functionality*
+5. **Dependency Inversion**  
+    It states that a high level module(business logic implementation) should not depend on low level module 
+    such as FileWriter, JsonFormatter etc.  
+    These dependencies should be abstracted out and injected into the high level module by the client application.  
+    The client application is the one which is using this high level module.  
+    *In the code example, the good `Logger` class implementation accepts low level module of `Writer` and `Formatter` 
+    This gives the flexibility to the client to select desired `Formatter` and `Writer`.  
+    The bad `Logger` class implementation tightly couples itself to `JsonFormatter` and `PrintWriter` reducing flexibility*
