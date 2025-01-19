@@ -151,3 +151,10 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
     *In the code example, the good `Logger` class implementation accepts low level module of `Writer` and `Formatter` 
     This gives the flexibility to the client to select desired `Formatter` and `Writer`.  
     The bad `Logger` class implementation tightly couples itself to `JsonFormatter` and `PrintWriter` reducing flexibility*
+
+## Design Patterns
+
+Types of design patterns:
+- ***Creational***: These deal with the process of creation of objects of classes.  
+- ***Structural***: These deal with how classes and objects are arranged oir composed.  
+- ***Behavioral***: These deal with how classes and objects interact and communicate with each other.  
