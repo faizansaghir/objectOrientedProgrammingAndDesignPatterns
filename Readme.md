@@ -100,7 +100,7 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
 
 ## SOLID Design Principles
 
-1. **Single Responsibility Principle**
+1. **Single Responsibility Principle**  
     It states that there should never be mote than one reason for a class to change.  
     It means, a class provides very focused functionality and address a specific concern.  
     - Say we have a class which is responsible to communicate with a server. It will change due to change in following.  
@@ -110,3 +110,13 @@ Repository to track leaning and hands-on for OOPs principles and Design patterns
 
     *In the example code, we can see that `ControllerBad` may change if validation logic changes, or storage logic changes.
     The `ControllerGood` does not hold validation or storage logic inside it thus it is less likely to be affected*
+2. **Open-Close Principle**  
+    Software entities (classes, modules, methods etc.) should be open for extension, but closed for modification.  
+    Open for extension means that a child class can inherit base class and can override existing behavior.  
+    Closed for modification means that the base class should not be modified once it has been written.  
+    It states that one should have a solid base class that contains all functionality and fields that will not change.  
+    - *In the code example, `Subscriber` is the base class that is closed for modification, 
+         and it contains only parts which will not be changed.*  
+    - *The `calculateBill()` method is what is open for extension, any child class extending `Subscriber` 
+       will modify this method, this keeps the base class unchanged while it is still open for extension.*
+git 
