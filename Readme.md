@@ -158,3 +158,28 @@ Types of design patterns:
 - ***Creational***: These deal with the process of creation of objects of classes.  
 - ***Structural***: These deal with how classes and objects are arranged oir composed.  
 - ***Behavioral***: These deal with how classes and objects interact and communicate with each other.  
+
+### Structural Design Pattern
+
+1. **Adapter Pattern**
+If existing object which provides functionality that client needs but the client expects an object with different interface.  
+- ***Steps to implement***
+   - Create class for Adapter which implements interface expected by client
+   - We can then extend Adaptee class and redirect method call of target interface to functions inherited from Adaptee
+     This is called a class adapter and is a two-way adapter as Adapter class can be used both as Target or Adaptee 
+   - We can alternatively accept Adaptee class object as a constructor argument and redirect method calls to Adaptee object  
+- ***Things to consider***
+   - Sometimes Adaptee and Target interface may differ based on the method signature, 
+     thus we might need some transformation in Adapter class to make it compatible
+   - We should avoid overriding existing Adaptee methods as it will cause Adapter and Adaptee to behave differently
+   - Try using object Adapter as the Adaptee implementation can be changed if required, 
+     and also if both Adaptee and Target are classes 
+   - Another reason to avoid class Adapter is that we will expose both Adaptee and Target interface methods, 
+     which will cause extra functions to be exposed than required which is not a good practice.
+   - Always do simple interface translation, do not add business logic, validation to Adapter.
+- ***Examples***
+  - java.io.InputStreamReader and java.io.OutputStreamWriter
+    These adapt existing `InputStream`/`OutputStream` object to a `Reader`/`Writer` interface
+- ***UML***
+    ![Adapter Class Pattern](./img/adapter_pattern_class_uml.png "Adapter Class Pattern")
+    ![Adapter Object Pattern](./img/adapter_pattern_object_uml.png "Adapter Object Pattern")
