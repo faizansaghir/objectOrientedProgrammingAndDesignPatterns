@@ -161,25 +161,57 @@ Types of design patterns:
 
 ### Structural Design Pattern
 
-1. **Adapter Pattern**
+1. **Adapter Pattern**  
 If existing object which provides functionality that client needs but the client expects an object with different interface.  
-- ***Steps to implement***
-   - Create class for Adapter which implements interface expected by client
-   - We can then extend Adaptee class and redirect method call of target interface to functions inherited from Adaptee
-     This is called a class adapter and is a two-way adapter as Adapter class can be used both as Target or Adaptee 
-   - We can alternatively accept Adaptee class object as a constructor argument and redirect method calls to Adaptee object  
-- ***Things to consider***
-   - Sometimes Adaptee and Target interface may differ based on the method signature, 
-     thus we might need some transformation in Adapter class to make it compatible
-   - We should avoid overriding existing Adaptee methods as it will cause Adapter and Adaptee to behave differently
-   - Try using object Adapter as the Adaptee implementation can be changed if required, 
-     and also if both Adaptee and Target are classes 
-   - Another reason to avoid class Adapter is that we will expose both Adaptee and Target interface methods, 
-     which will cause extra functions to be exposed than required which is not a good practice.
-   - Always do simple interface translation, do not add business logic, validation to Adapter.
-- ***Examples***
-  - java.io.InputStreamReader and java.io.OutputStreamWriter
-    These adapt existing `InputStream`/`OutputStream` object to a `Reader`/`Writer` interface
-- ***UML***
-    ![Adapter Class Pattern](./img/adapter_pattern_class_uml.png "Adapter Class Pattern")
-    ![Adapter Object Pattern](./img/adapter_pattern_object_uml.png "Adapter Object Pattern")
+   - ***Steps to implement***
+      - Create class for Adapter which implements interface expected by client
+      - We can then extend Adaptee class and redirect method call of target interface to functions inherited from Adaptee
+        This is called a class adapter and is a two-way adapter as Adapter class can be used both as Target or Adaptee 
+      - We can alternatively accept Adaptee class object as a constructor argument and redirect method calls to Adaptee object  
+   - ***Things to consider***
+      - Sometimes Adaptee and Target interface may differ based on the method signature, 
+        thus we might need some transformation in Adapter class to make it compatible
+      - We should avoid overriding existing Adaptee methods as it will cause Adapter and Adaptee to behave differently
+      - Try using object Adapter as the Adaptee implementation can be changed if required, 
+        and also if both Adaptee and Target are classes 
+      - Another reason to avoid class Adapter is that we will expose both Adaptee and Target interface methods, 
+        which will cause extra functions to be exposed than required which is not a good practice.
+      - Always do simple interface translation, do not add business logic, validation to Adapter.
+   - ***Examples***
+     - java.io.InputStreamReader and java.io.OutputStreamWriter
+       These adapt existing `InputStream`/`OutputStream` object to a `Reader`/`Writer` interface
+   - ***UML***
+       ![Adapter Class Pattern](./img/adapter_pattern_class_uml.png "Adapter Class Pattern")
+       ![Adapter Object Pattern](./img/adapter_pattern_object_uml.png "Adapter Object Pattern")
+2. **Bridge Pattern**  
+During inheritance using interface or abstract class or simple class, our class is coupled to the abstraction.  
+If we want to change the interface of already implemented class, we need to make changes to its interface and implementation.  
+Using bridge pattern, we can make these 2 independent so that we can change the interface without changing existing interface.   
+It creates 2 hierarchy, one for the abstraction that will be used by client, the other is implementation abstraction.  
+The abstraction hierarchy will have an implementation of implementor which will be a concrete implementor  
+Using the instance of the implementor, the concrete abstraction class will accomplish the operations of abstraction.  
+eg: `LIFOCollection` is an abstraction which has `push` and `pop` methods
+`Stack` is an example of concrete implementation of `LIFOCollection` but it will use an implementation of `List` interface
+`LinkedList` is a concrete implementation of `List` interface which has `addLast`, `removeLast`, etc. methods
+`Stack` can have an instance of `LinkedList` and use `addLast` and `removeLast` methods of the instance to define `push` and `pop`
+    - **Steps to implement**  
+      - Create abstraction/ interface which client will use along with the required methods which client will use
+        This abstraction can itself be a concrete class.
+      - Define implementor interface. Implementor methods do not have to match with abstraction, 
+         but these methods should be such that abstraction implementation can implement methods using instance of implementor. 
+      - Write one or more concrete implementor. The implementor implementation can itself be a concrete class
+      - When creating object of abstraction interface, we pass the concrete class of implementor to get a composition
+    - **Things to consider**  
+      - We can skip creating implementor interface if we will only have single implementation of implementor  
+      - Our abstraction implementation can either use a concrete implementor or delegate the decision to client code  
+    - **Example**  
+      - java.sql.DriverManager and java.sql.Driver
+        DriverManager has `getConnection` method which uses a Driver internally. The Driver has `connect` method
+        The implementation of Driver can be different for different databases like `com.mysql.jdbc.Driver` and 
+         `oracle.jdbc.driver.OracleDriver` 
+    - **UML**  
+        ![Bridge Design Pattern](./img/bridge_pattern_uml.png "Bridge Design Pattern")
+    - **Difference from Adapter Pattern**  
+      - Adapter is used when we already have all the implementations but the interface do not match
+      - Bridge is used when we have implementations which can be used to provide required functionalities 
+      by single or by combining multiple existing implemented method(s) from the concrete implementor
