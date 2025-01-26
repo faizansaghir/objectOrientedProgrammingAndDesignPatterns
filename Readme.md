@@ -215,3 +215,30 @@ eg: `LIFOCollection` is an abstraction which has `push` and `pop` methods
       - Adapter is used when we already have all the implementations but the interface do not match
       - Bridge is used when we have implementations which can be used to provide required functionalities 
       by single or by combining multiple existing implemented method(s) from the concrete implementor
+3. **Decorator Pattern**  
+When we want to extend the functionality or enhance the behavior of existing object dynamically as and when required, 
+we use decorator pattern. Decorator wraps the object within itself and provides same interface as the wrapped object.  
+This helps in keeping the client of original object unchanged. It provides alternate to subclassing for extending functionality.
+    - **Steps to implement**  
+      - Identify component interface which needs to be defined or is being already used by clients.  
+      - A concrete component will implement the component interface.  
+      - A decorator is defined which implement Component interface while also has a Component as a reference.  
+      - Add additional behaviour on top of the passed reference behaviour.  
+      *Note: Decorator can be abstract as well and depend on subclasses to provide functionality*  
+    - **Things to consider**  
+      - Avoid using large state in base class as decorators may not need all the state.  
+      - Decide whether `equals` and `hashCode` methods should be overridden i.e. if decorated instance should equal base instance.
+      - Since it is a recursive composition, debugging, can be tough at times when there is very large hierarchy.  
+      - Decorator is more powerful than inheritance as it allows dynamic or runtime changes while inheritance is static.  
+      - The decorator should add small addition to the object it decorates and should not change the functionality all together.  
+    - **Example**
+      - Classes in Java's I/O package
+      - java.io.BufferedOutputStream and java.io.OutputStream
+        BufferedOutputStream is decorator which adds buffering to any output stream
+    - **UML**
+      ![Decorator Design Pattern](./img/decorator_pattern_uml.png "Decorator Design Pattern")
+    - **Difference from Adapter Pattern**
+      - Adapter changes interface without changing behaviour. 
+        An adapter cannot be used in place of an Adaptee thus it is also difficult to recursively compose Adapter and Adaptee.
+      - Decorator changes behaviour without changing interface
+        A decorator can be used in place of a Component since they share same interface and can be composed recursively.  
