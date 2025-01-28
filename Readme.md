@@ -272,3 +272,33 @@ These are arguably added as purpose of Composite pattern is to treat leaf as wel
             Contains a single object and not children, and add or modify the behaviour of contained object
         - In Composite, it is for aggregation, and can have any number of children. It deals with tree structures. 
             Composites only delegate operation to children without any modification
+5. **Facade Pattern**  
+If our client code interacts with a large number of classes that are part of a subsystem, e.g. email related classes to send email.
+This tightly couples our code to many classes or interface.  
+Facade pattern solves this issue by exposing a simple and unified interface to the subsystem. 
+Client interacts with just the facade to get the same result
+    - **Steps to implement**
+        - Create a Facade class which will have functions which will be exposed to client
+        - These functions should be relevant to what the subsystem should do, e.g. `sendOrderEmail`, `writeFileToDisk`.
+        - Use different available classes to implement these functionalities
+    - **Things to consider**
+        - Should minimize complexity of using subsystem by exposing usable and simple interface
+        - We can create Facade as interface and have concrete implementation classes for it 
+          if our subsystem can have multiple implementation
+        - Facade is used to reduce coupling between subsystems as without facade, 
+          the client is too much aware of how things are working
+        - If simplification of subsystem if not a primary concern and only loose coupling is required, 
+          we can use Factory pattern
+        - If we are often in need of using Facade pattern, 
+          we need to review our code as to why our original system being developed is so complex to use.
+        - Facade is often used to hide improper API design and is used as container of related methods which is wrong.
+    - **Example**
+        - `java.net.URL` which is used to locate a resource on web or on local file system, 
+           we can get input stream by simply using `openStream()`. 
+          It eliminates interaction and tight coupling with `java.net` and `sun` packages.
+    - **UML**
+      ![Facade Design Pattern](./img/facade_pattern_uml.png "Facade Design Pattern")
+    - **Difference from Adapter Pattern**
+        - Adapter is for adapting object to different interface, it needs to adhere to a particular interface needed by client
+        - Facade intent is to simplify usage of subsystem for client, it can implement and need not adhere to any interface
+          The end goal is to make using the subsystem for the client easier and simpler
