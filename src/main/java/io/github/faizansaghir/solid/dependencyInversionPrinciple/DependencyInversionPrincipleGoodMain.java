@@ -13,8 +13,8 @@ public class DependencyInversionPrincipleGoodMain {
         Formatter formatter = new JsonFormatter();
         Writer writer = new PrintWriter(new FileWriter("log.txt", true));
         Logger loggerFile = new Logger(formatter, writer);
-        loggerFile.log("Started File");
-        loggerFile.log("Ended File");
+        loggerFile.log("Started FileNonCommon");
+        loggerFile.log("Ended FileNonCommon");
 
         Logger loggerConsole = new Logger(formatter, System.console().writer());
         loggerConsole.log("Started Console");

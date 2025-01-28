@@ -242,3 +242,33 @@ This helps in keeping the client of original object unchanged. It provides alter
         An adapter cannot be used in place of an Adaptee thus it is also difficult to recursively compose Adapter and Adaptee.
       - Decorator changes behaviour without changing interface
         A decorator can be used in place of a Component since they share same interface and can be composed recursively.  
+4. **Composite Pattern**  
+If we have a hierarchy of objects, and we want to give them a common interface, then we can use composite design pattern.  
+It helps in treating objects that use composition in same way as one that does not use.  
+eg: `FileSystemComponent` can be the common interface, while `TextFile` and `Directory` are its concrete implementation.  
+We can decide if we only want to keep common functionality defined in `FileSystemComponent`, 
+or we want to add children management functionalities also.  
+These children management functionalities, though implemented in leaf node, will only throw unsupported exception.  
+These are arguably added as purpose of Composite pattern is to treat leaf as well as ancestor nodes in the same way.  
+    - **Steps to implement**
+        - Create a Component interface which has all the common functionalities declared
+        - Decide if the children management functionalities are to be included in Component interface
+        - Add Composite as an implementation of Component which propagates the invoked operation to all its children
+        - Implement Leaf as another implementation of Component which implements the common functionalities,
+          if the children management functionalities are also to be implemented, handle these functionalities with exceptions
+    - **Things to consider**
+        - We can provide method to access parent node. This simplifies tree traversal in any order
+        - If we are using a node in many different places in the tree, 
+          we can cache them if they are immutable and initialization cost is high
+        - Design principle of the pattern suggest having child management functionalities in Composite interface.
+          This helps the client to not care about if they are working with leaf or any other implementation 
+    - **Example**
+        - In JSF, we have `UIViewRoot` which is interface, `UIComponentBase` is a base implementation, 
+          `UIMessage` and `UIOutput` are leaf components while `UIViewRoot` is non-leaf component. All extend `UIComponentBase`
+    - **UML**
+      ![Composite Design Pattern](./img/composite_pattern_uml.png "Composite Design Pattern")
+    - **Difference from Decorator Pattern**
+        - In Decorator, intent is to `add to` existing behaviour, and can be considered as composite with single child.
+            Contains a single object and not children, and add or modify the behaviour of contained object
+        - In Composite, it is for aggregation, and can have any number of children. It deals with tree structures. 
+            Composites only delegate operation to children without any modification
