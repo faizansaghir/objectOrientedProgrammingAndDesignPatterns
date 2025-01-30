@@ -302,3 +302,49 @@ Client interacts with just the facade to get the same result
         - Adapter is for adapting object to different interface, it needs to adhere to a particular interface needed by client
         - Facade intent is to simplify usage of subsystem for client, it can implement and need not adhere to any interface
           The end goal is to make using the subsystem for the client easier and simpler
+6. **Flyweight Pattern**    
+If we can have a large number of instances of a particular class, and each instance can take up a good amount of space,
+this can lead to performance concerns. 
+Instead of sharing the entire object, we can divide these instances having some intrinsic and some extrinsic states. 
+eg:  
+   1. We can have multiple instances of error messages which have the same template string, 
+     just the error code is changed in template for each instance, then we can consider template as intrinsic state, 
+     while error code is considered extrinsic state.
+   2. We can have multiple instances of an image in game, say an image appears at multiple location within the game, 
+     we can create the image matrix as intrinsic state, while the location of each instance can be extrinsic state.
+     We can create a single instance of the object and whenever we want to render the image, 
+     we pass the extrinsic state i.e. location to the render function
+
+   We use factory to return the object of the Flyweight class, 
+   so that Client does not need to know how object is created, shared or cached
+    *We can also have instances where we cannot share the states, thus some concrete classes of Flyweight are typical classes*
+   - **Steps to implement**
+        - Identify intrinsic and extrinsic state of our object
+        - Create an interface for Flyweight to provide common methods that accept extrinsic state e.g. `render(Location)`
+        - In shared flyweight implementation, we implement the common methods by assuming extrinsic state to be passed
+        - In unshared flyweight implementation, we ignore that the extrinsic state will be passed, 
+          and we store all state within the object and the common method uses this object state from within.
+        - Flyweight factory will cache shared implementation instances and also provide methods to retrieve them
+        - The extrinsic state can be stored in client side or computed on the go when using shared Flyweight implementation
+   - **Things to consider**
+        - Factory is needed as we need a central place to hold shared instances.  
+          Number of shared instances can be large, hence this helps in keeping track in a central location
+        - The intrinsic state should be immutable
+        - Our usage is dependent on whether we can identify an extrinsic state that client can pass
+   - **Example**
+        - Wrapper classes like java.lang.Integer, Short, Byte etc. but not Float, Double etc.
+          It is used as Flyweight when we use `valueOf` static method of these classes. 
+          When we call the static function, we get the same instance everytime for each wrapper type
+          The factory cache of `Integer` and other wrappers hold some pre-defined instances 
+          like for `Integer` it might have instances cached for values from -128 to 127, 
+          so whenever we call `Integer.valueOf`, it does not create a new `Integer` instance, rather it returns cached instance.
+        - String pool. When we define strings using double quotes, these are stored/cached in String pool.
+          If we call `intern` function of String object, it will check if String pool has that String and return the reference, 
+          if not present, then it will create an instance in pool and return thr reference.
+   - **UML**
+      ![Flyweight Design Pattern](./img/flyweight_pattern_uml.png "Flyweight Design Pattern")
+   - **Difference from Object Pool**
+        - State of flyweight is divided and the client must provide the extrinsic state.  
+            The client will not change intrinsic state of flyweight instance 
+        - Pooled object contains all its state encapsulate within itself.  
+            Clients can and do change the state of pooled objects.  
