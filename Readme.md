@@ -162,7 +162,7 @@ Types of design patterns:
 ### Structural Design Pattern
 
 1. **Adapter Pattern**  
-If existing object which provides functionality that client needs but the client expects an object with different interface.  
+   If existing object which provides functionality that client needs but the client expects an object with different interface.  
    - ***Steps to implement***
       - Create class for Adapter which implements interface expected by client
       - We can then extend Adaptee class and redirect method call of target interface to functions inherited from Adaptee
@@ -184,16 +184,16 @@ If existing object which provides functionality that client needs but the client
        ![Adapter Class Pattern](./img/adapter_pattern_class_uml.png "Adapter Class Pattern")
        ![Adapter Object Pattern](./img/adapter_pattern_object_uml.png "Adapter Object Pattern")
 2. **Bridge Pattern**  
-During inheritance using interface or abstract class or simple class, our class is coupled to the abstraction.  
-If we want to change the interface of already implemented class, we need to make changes to its interface and implementation.  
-Using bridge pattern, we can make these 2 independent so that we can change the interface without changing existing interface.   
-It creates 2 hierarchy, one for the abstraction that will be used by client, the other is implementation abstraction.  
-The abstraction hierarchy will have an implementation of implementor which will be a concrete implementor  
-Using the instance of the implementor, the concrete abstraction class will accomplish the operations of abstraction.  
-eg: `LIFOCollection` is an abstraction which has `push` and `pop` methods
-`Stack` is an example of concrete implementation of `LIFOCollection` but it will use an implementation of `List` interface
-`LinkedList` is a concrete implementation of `List` interface which has `addLast`, `removeLast`, etc. methods
-`Stack` can have an instance of `LinkedList` and use `addLast` and `removeLast` methods of the instance to define `push` and `pop`
+   During inheritance using interface or abstract class or simple class, our class is coupled to the abstraction.  
+   If we want to change the interface of already implemented class, we need to make changes to its interface and implementation.  
+   Using bridge pattern, we can make these 2 independent so that we can change the interface without changing existing interface.   
+   It creates 2 hierarchy, one for the abstraction that will be used by client, the other is implementation abstraction.  
+   The abstraction hierarchy will have an implementation of implementor which will be a concrete implementor  
+   Using the instance of the implementor, the concrete abstraction class will accomplish the operations of abstraction.  
+   eg: `LIFOCollection` is an abstraction which has `push` and `pop` methods
+   `Stack` is an example of concrete implementation of `LIFOCollection` but it will use an implementation of `List` interface
+   `LinkedList` is a concrete implementation of `List` interface which has `addLast`, `removeLast`, etc. methods
+   `Stack` can have an instance of `LinkedList` and use `addLast` and `removeLast` methods of the instance to define `push` and `pop`
     - **Steps to implement**  
       - Create abstraction/ interface which client will use along with the required methods which client will use
         This abstraction can itself be a concrete class.
@@ -216,9 +216,9 @@ eg: `LIFOCollection` is an abstraction which has `push` and `pop` methods
       - Bridge is used when we have implementations which can be used to provide required functionalities 
       by single or by combining multiple existing implemented method(s) from the concrete implementor
 3. **Decorator Pattern**  
-When we want to extend the functionality or enhance the behavior of existing object dynamically as and when required, 
-we use decorator pattern. Decorator wraps the object within itself and provides same interface as the wrapped object.  
-This helps in keeping the client of original object unchanged. It provides alternate to subclassing for extending functionality.
+   When we want to extend the functionality or enhance the behavior of existing object dynamically as and when required, 
+   we use decorator pattern. Decorator wraps the object within itself and provides same interface as the wrapped object.  
+   This helps in keeping the client of original object unchanged. It provides alternate to subclassing for extending functionality.
     - **Steps to implement**  
       - Identify component interface which needs to be defined or is being already used by clients.  
       - A concrete component will implement the component interface.  
@@ -243,13 +243,13 @@ This helps in keeping the client of original object unchanged. It provides alter
       - Decorator changes behaviour without changing interface
         A decorator can be used in place of a Component since they share same interface and can be composed recursively.  
 4. **Composite Pattern**  
-If we have a hierarchy of objects, and we want to give them a common interface, then we can use composite design pattern.  
-It helps in treating objects that use composition in same way as one that does not use.  
-eg: `FileSystemComponent` can be the common interface, while `TextFile` and `Directory` are its concrete implementation.  
-We can decide if we only want to keep common functionality defined in `FileSystemComponent`, 
-or we want to add children management functionalities also.  
-These children management functionalities, though implemented in leaf node, will only throw unsupported exception.  
-These are arguably added as purpose of Composite pattern is to treat leaf as well as ancestor nodes in the same way.  
+   If we have a hierarchy of objects, and we want to give them a common interface, then we can use composite design pattern.  
+   It helps in treating objects that use composition in same way as one that does not use.  
+   eg: `FileSystemComponent` can be the common interface, while `TextFile` and `Directory` are its concrete implementation.  
+   We can decide if we only want to keep common functionality defined in `FileSystemComponent`, 
+   or we want to add children management functionalities also.  
+   These children management functionalities, though implemented in leaf node, will only throw unsupported exception.  
+   These are arguably added as purpose of Composite pattern is to treat leaf as well as ancestor nodes in the same way.  
     - **Steps to implement**
         - Create a Component interface which has all the common functionalities declared
         - Decide if the children management functionalities are to be included in Component interface
@@ -303,10 +303,10 @@ Client interacts with just the facade to get the same result
         - Facade intent is to simplify usage of subsystem for client, it can implement and need not adhere to any interface
           The end goal is to make using the subsystem for the client easier and simpler
 6. **Flyweight Pattern**    
-If we can have a large number of instances of a particular class, and each instance can take up a good amount of space,
-this can lead to performance concerns. 
-Instead of sharing the entire object, we can divide these instances having some intrinsic and some extrinsic states. 
-eg:  
+   If we can have a large number of instances of a particular class, and each instance can take up a good amount of space,
+   this can lead to performance concerns. 
+   Instead of sharing the entire object, we can divide these instances having some intrinsic and some extrinsic states. 
+   eg:  
    1. We can have multiple instances of error messages which have the same template string, 
      just the error code is changed in template for each instance, then we can consider template as intrinsic state, 
      while error code is considered extrinsic state.
@@ -316,7 +316,7 @@ eg:
      we pass the extrinsic state i.e. location to the render function
 
    We use factory to return the object of the Flyweight class, 
-   so that Client does not need to know how object is created, shared or cached
+   so that Client does not need to know how object is created, shared or cached  
     *We can also have instances where we cannot share the states, thus some concrete classes of Flyweight are typical classes*
    - **Steps to implement**
         - Identify intrinsic and extrinsic state of our object
@@ -348,3 +348,43 @@ eg:
             The client will not change intrinsic state of flyweight instance 
         - Pooled object contains all its state encapsulate within itself.  
             Clients can and do change the state of pooled objects.  
+7. **Proxy Pattern**    
+      Whenever we want an object that can be substituted or can take place of actual object, we can use proxy.
+      This pattern or Proxy are used for a wide range of use cases
+      1. Protection Proxy: Control which operations can be called on real object
+      2. Remote Proxy: It provides a local representation of remote object and the proxy handles network calls to remote object
+      3. Virtual Proxy: It delays construction of real object until necessary  
+      *Client does not know that a proxy exists*  
+      eg:  
+      Lazy loading of collection by Hibernate  
+      AOP based security provided by SpringFramework  
+   - **Steps to implement**
+       - Proxy must implement the same interface as implemented by real object
+       - We can create actual object later when required or ask for one in constructor
+       - In method implementation of proxy, we implement proxy's functionality and delegate call to real object when required
+       - We can decide based on our use case if we want a factory to provide proxy instance or directly create on in client code
+       - Proxy is also supported by Java using `InvocationHandler`
+   - **Things to consider**
+       - Whether a Proxy accepts a proxy or creates one on demand is based on type of proxy.  
+         For Virtual proxy, we just want to delay creation of real object, 
+         hence we create one inside the proxy object when needed  
+         For Protection proxy, we just want to apply some check before we delegate the call, 
+         hence we required real object at the very beginning  
+       - Take into consideration synchronization as this is not inherited by default from real object
+       - Proxy themselves can maintain state/cache on behalf of real object, until the real object is created
+       - A proxy when implemented, need not know about real object, it can assume it is implemented even if it actually is not
+       - Try to use proxy pattern if possible as it is a good way of wrapping and handling security
+       - Java provides dynamic proxy for classes which implement at least one interface
+       - Since some proxy create object inside themselves, chaining proxies can cause instantiation of multiple instances.  
+         Thus, it is important that we club all functionalities that are to be incorporated in a single proxy class 
+         rather than multiple proxies and chaining them somehow.
+   - **Example**
+       - Whenever a collection or relation in Hibernate is marked as Lazy loaded, Hibernate uses virtual proxy pattern
+       - Spring uses proxy for features like transactions, caching and general AOP support
+   - **UML**
+     ![Proxy Design Pattern](./img/proxy_pattern_uml.png "Proxy Design Pattern")
+   - **Difference from Decorator**
+       - Decorator always needs a real object which it can wrap 
+         and provides functionalities that are visible and usable by client
+       - Proxy does not always need a real object 
+         and provides features like access control, lazy loading, auditing, etc. which is not necessarily used by client
