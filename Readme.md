@@ -388,3 +388,34 @@ Client interacts with just the facade to get the same result
          and provides functionalities that are visible and usable by client
        - Proxy does not always need a real object 
          and provides features like access control, lazy loading, auditing, etc. which is not necessarily used by client
+
+### Behavioral Design Pattern
+
+1. **Chain Of Responsibility Pattern**  
+    When we need to avoid coupling code which send request to the code which handles the request.  
+    Chain of responsibility solves problem of knowing exact object and method to call for request, 
+    it gives more than one object, the chance to process the request. Just need to know first object in chain.  
+    We give request to first object in chain which know which object is next in the chain. If it is able to handle, 
+    then it handles it, otherwise it passes the request to the next object in chain.  
+    It does not guarantee that the request will be processed, it might fall off if none of the object in chain handles it.
+    - ***Steps to implement***
+        - Define a handler interface or an abstract class. e.g. `Employee`  
+          It must define method to accept incoming request e.g. `processLeaveApplication`  
+          Can additionally provide access to success in chain. If abstract class, then it can also maintain the successor.
+        - Implement interface or abstract class with handler. Handler to check if they can handle the request. 
+          If not, then it should pass the request to successor.  
+        - The chain of objects is created in client code or some framework or initialization code written by the developer.
+        - Client only needs reference to first object in chain and will request to the first object only
+    - ***Things to consider***
+        - Prefer defining handler as interface as Java has single inheritance rule.
+        - We can even propagate the request after handling it, similar to Servlet filter chains
+        - We can create chain from JSOn or XML configurations, thus we can recreate the chain without code changes.
+        - Existing chain like composition can be used for chain of responsibility
+        - While configuring, we can leave out or add successor where not needed or intended, and there is no check for that.
+    - ***Examples***
+        - Servlet filters: Each filter gets a chance to handle incoming request and passes it down once its work is done.
+          Each filter implement `javax.servlet.Filter` with `doFilter` method.  
+          `public void doFilter(ServletReqeust request, ServletResponse response, FilterChain chain)`  
+          The implementation will use `FilterChain` to pass request to next handler in chain `chain.doFilter(request, response)`
+    - ***UML***
+      ![Chain Of Responsibility Pattern](./img/chain_of_responsibility_pattern_uml.png "Chain Of Responsibility Pattern")
