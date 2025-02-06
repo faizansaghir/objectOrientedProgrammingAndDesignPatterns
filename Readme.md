@@ -419,3 +419,31 @@ Client interacts with just the facade to get the same result
           The implementation will use `FilterChain` to pass request to next handler in chain `chain.doFilter(request, response)`
     - ***UML***
       ![Chain Of Responsibility Pattern](./img/chain_of_responsibility_pattern_uml.png "Chain Of Responsibility Pattern")
+2. **Command Pattern**  
+    This pattern is used when we want to represent a method call or a request as an object.  
+    All information about parameters and actual operation are encapsulated within the command object.  
+    The command object can also have actual reference to object on which the operation is performed.  
+    Say we want to call a function `addMember` of `EWSService` object with `email` and `groupName` parameters, 
+    we will pass all these to the command object say `AddMemberCommand` which will store all these references.  
+    We will then pass this command object to some executor service, which will be responsible to schedule this command.  
+    The invoker just needs to call command object's `execute()` method. The execute method will have all the logic defined.
+    - ***Steps to implement***
+        - Define a `Command` interface with `execute()` method
+        - Implement Command interface and these implementations should know which function to call, 
+          what parameters are needed to call the function and on which object if object needed.
+        - Some command can also have undo operations for each command that it can execute.
+        - Client creates command instances and sets up receiver and all required parameters
+        - The command instance is shared with the invoker to execute the command when needed or feasible.
+    - ***Things to consider***
+        - You can support `undo` and `redo` in command which makes it very helpful
+        - If any command does not require state like parameters, object etc. and only hides function calls, 
+           the same Command object can be reused, saving initialization time and memory cost 
+        - State of command can cause some issues if the commands are queued for a long time or when you have to maintain history
+        - We can inherit other command and enhance the functionality
+        - We can compose a command using multiple commands which can execute the sub commands when the macro command is executed
+        - For undo feature, we can use memento pattern
+    - ***Examples***
+        - java.lang.Runnable: single method run, and we call operation on receiver. We can also send it for later execution
+        - Action class in struts framework: URL mapped to an action class. When request is made, action is called  
+    - ***UML***
+      ![Command Pattern](./img/command_pattern_uml.png "Command Pattern")
