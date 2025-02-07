@@ -447,3 +447,8 @@ Client interacts with just the facade to get the same result
         - Action class in struts framework: URL mapped to an action class. When request is made, action is called  
     - ***UML***
       ![Command Pattern](./img/command_pattern_uml.png "Command Pattern")
+    - **Difference from Chain of Responsibility(CoR)**  
+      - In CoR pattern, request is passed on if handler is unable to handle, thus it does not guarantee request being handled
+         We can not reverse the action or track which handler handled the request
+      - In Command pattern, request needs to be handled by the instance, thus it guarantees request to be handled
+        They are trackable and storing the order of command instances also helps in reversing the same.
