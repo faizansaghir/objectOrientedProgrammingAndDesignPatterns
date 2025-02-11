@@ -452,3 +452,36 @@ Client interacts with just the facade to get the same result
          We can not reverse the action or track which handler handled the request
       - In Command pattern, request needs to be handled by the instance, thus it guarantees request to be handled
         They are trackable and storing the order of command instances also helps in reversing the same.
+3. **Interpreter Pattern**  
+    When we want to process a simple language with rules and grammar e.g. `boolean expression`, `mathematical expression` as String
+    Interpreter is used to represent rules of the language in a Data Structure e.g. `Tree`
+    We can then use say `boolean interpret(Object)` function to check if the object follows that structure or not
+    e.g. A user with `admin` and `developer` permission follows the tree structure formed by `admin or owner`, `admin and developer`
+    but does not follow `admin and owner`, `finance_admin or finance_manager`, `not admin`, `not developer`
+    - ***Steps to implement***
+        - Define or study rules of language
+        - Define abstract/ interface Expression e.g. `PermissionExpression` which will represent node of expression
+        - Expressions that do not require other expression, become leaf/ terminal expression e.g. `Permission`
+        - Non-terminal expressions will call interpret on each of its child Expression and then merge the results as required
+            e.g. `AndExpression`, `NotExpression`
+        - The build of data structure like tree can be done by client itself, or a separate class e.g. `ExpressionBuilder` 
+          that accepts a wrapper/ context e.g. `Report` object or the expression e.g. `Report.permissions` directly, 
+          and builds the data structure out of it.
+        - The client can then use the Expression e.g. `InterpreterPatternMain.exp` returned by the builder class  
+           to evaluate/ interpret if an object e.g. `InterpreterPatternMain.user1` follows the rules
+    - ***Things to consider***
+        - Apart from interpreting, it can also be used for pretty printing
+        - Parsing is up to the developer and where to parse the expression
+        - We can create context or skip it if no additional states are needed
+        - We can use Visitor pattern to interpret instead of adding it to Expression class
+        - We can use flyweight pattern for Terminal Expressions as these can be often reused e.g. `Permission` object for `ADMIN`
+        - It causes large number of classes for simple languages also, not suitable for languages with complex grammar rules
+        - It is very particular to a specific type of problem
+    - ***Examples***
+        - `java.util.regex.Pattern` has `compile()` to create tree. 
+          ```java
+            Pattern pattern = Pattern.compile("ADMIN", Pattern.CASE_INSENSITIVE);
+          ```
+        - `javax.el.Expression` which can be created using `javax.el.ExpressionFactory`
+    - ***UML***
+      ![Interpreter Pattern](./img/interpreter_pattern_uml.png "Interpreter Pattern")
