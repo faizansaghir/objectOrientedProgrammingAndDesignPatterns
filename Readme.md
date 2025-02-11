@@ -465,10 +465,10 @@ Client interacts with just the facade to get the same result
         - Non-terminal expressions will call interpret on each of its child Expression and then merge the results as required
             e.g. `AndExpression`, `NotExpression`
         - The build of data structure like tree can be done by client itself, or a separate class e.g. `ExpressionBuilder` 
-          that accepts a wrapper/ context e.g. `Report` object or the expression e.g. `Report.permissions` directly, 
+          that accepts a wrapper e.g. `Report` object or the expression e.g. `Report.permissions` directly, 
           and builds the data structure out of it.
         - The client can then use the Expression e.g. `InterpreterPatternMain.exp` returned by the builder class  
-           to evaluate/ interpret if an object e.g. `InterpreterPatternMain.user1` follows the rules
+           to evaluate/ interpret if a context e.g. `InterpreterPatternMain.user1` follows the rules
     - ***Things to consider***
         - Apart from interpreting, it can also be used for pretty printing
         - Parsing is up to the developer and where to parse the expression
