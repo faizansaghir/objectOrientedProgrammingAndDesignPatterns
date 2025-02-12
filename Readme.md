@@ -485,3 +485,37 @@ Client interacts with just the facade to get the same result
         - `javax.el.Expression` which can be created using `javax.el.ExpressionFactory`
     - ***UML***
       ![Interpreter Pattern](./img/interpreter_pattern_uml.png "Interpreter Pattern")
+4. **Mediator Pattern**  
+    Helps us remove complexity and tight coupling when objects need to interact with/ notify each other, 
+     say `Slider` UI change triggers `TextBox` UI change and vice versa and also changes `Label`
+    Instead of notifying each colleague, the UIControl will only inform the mediator and should only know the mediator. 
+     The mediator then forwards and notifies all other UIControl about the change.
+    In case we want to add or remove any UIControl from the group, we only need to update mediator class.  
+    *Note: It is not necessary that all UIControl implement a common interface, 
+      it might happen that all objects registered with mediator are of different type, 
+      hence tight coupling may happen in Mediator class*
+    - ***Steps to implement***
+        - Define a Mediator which can be concrete implementation or an abstract class/ interface
+        - Declare a method in Mediator that can be used to tell the Mediator that value of an object has changed and notify others.
+           This method should accept the changed object so that Mediator knows which other objects to notify.
+           Apart from this it may accept the changed value and pass it while notifying other objects, or skip this parameter,
+           in this case, the other objects being notified are passed reference of the changed object for retrieving value
+        - For the mediator to know all the participating objects, either all objects register themselves to mediator, 
+           or the participating objects are created by the mediator itself
+        - If value change triggers an event in participant which can cause a loop of changes and mediator calls, 
+          we need to handle this e.g. change in UI value which causes change in other UI object values
+    - ***Things to consider***
+        - Mediator should know which object has sent the notification change so that it does not notify the caller object
+        - The method call of notifying the participants should not take very long which can cause mediator to be stuck.
+           Any synchronization should be handled carefully so at to avoid blocking the Mediator
+        - The Mediator can get complex as it deals with different types of object, and it routes the notification to each
+        - We can extend Mediators to enhance the notification based on different environments like cloud, local etc.
+        - We can consider using Observer pattern to notify the Mediator of any change
+        - Mediators are not usually reusable as it is tightly coupled to many objects
+    - ***Examples***
+        - `javax.swing.ButtonGroup` makes sure only one of the button is selected. Participating Buttons notify Mediator
+        - A specialized version of Mediator pattern is `DispatcherServlet` or `FrontController` in `Spring`
+            It has some characteristics of Mediator like central hub for all requests, but it also accepts external requests
+            Apart from this, it also has some filtering logic based on which it selects which participant to notify
+    - ***UML***
+      ![Mediator Pattern](./img/mediator_pattern_uml.png "Mediator Pattern")
