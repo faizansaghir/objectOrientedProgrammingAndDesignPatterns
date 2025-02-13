@@ -519,3 +519,28 @@ Client interacts with just the facade to get the same result
             Apart from this, it also has some filtering logic based on which it selects which participant to notify
     - ***UML***
       ![Mediator Pattern](./img/mediator_pattern_uml.png "Mediator Pattern")
+5. **Iterator Pattern**  
+    When we have an aggregate object like Collection i.e. object that has instances of same class aggregated inside it,
+     iterator pattern is used to give access to the instances inside the aggregator and hides the underlying data structure
+    In Java, Iterators use the same design pattern to implement
+    Iterators are stateful and remembers the position it is at, if the underlying values change, the iterator becomes invalid
+    - ***Steps to implement***
+        - Define Iterator interface with method definition used to inform if the iterator has more elements
+           We use `hasNext()` for check and `next()` for retrieval of next instance
+        - The iterators are defined within the class for which iterator is defined, 
+           so that the underlying data structure is not exposed
+        - The concrete iterator should maintain state to retain at which position it currently is at
+    - ***Things to consider***
+        - We need to detect change in underlying data structure if the client is using iterator and notify, 
+           else the iterator it may give inconsistent results
+        - Always prefer using iterators so that changing implementation can be done without affecting client code
+        - Iterators are used apart from Collections in places where we want to give sequential access like lines of file
+        - We do not get direct access to index when using iterator in for loop
+        - Modifications to the collection while using iterator makes the iterator invalid
+        - It is not mandatory to always have forward iterator, we can also have reverse or bi-directional iterators
+    - ***Examples***
+        - Iterator class in Collection framework. Each implementation has its own Iterator implementation
+        - `java.util.Scanner` supports `InputStream` as well and allows to iterate over a stream
+        - `javax.xml.stream.XMLEventReader`
+    - ***UML***
+      ![Iterator Pattern](./img/iterator_pattern_uml.png "Iterator Pattern")
