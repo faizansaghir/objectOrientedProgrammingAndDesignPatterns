@@ -544,3 +544,33 @@ Client interacts with just the facade to get the same result
         - `javax.xml.stream.XMLEventReader`
     - ***UML***
       ![Iterator Pattern](./img/iterator_pattern_uml.png "Iterator Pattern")
+6. **Memento Pattern**  
+    When we want to store object's state without exposing internal details, we create a memento inside that object.  
+    The object that can read or access the memento is the object whose snapshot we have taken.  
+    This is used to restore a saved state of the object whose memento we are creating.  
+    Often combined with Command pattern to provide undo functionality
+    - ***Steps to implement***
+        - Decide on necessary states to be stored in Memento which can be used to restore the object state
+        - The Memento should not be exposed to outside world, neither reading not changing
+        - Originator i.e. `WorkflowDesigner` in our case should provide method e.g. `getMemento` to get its current snapshot out, 
+          which will return an instance of memento
+        - Another method in originator e.g. `setMemento` takes a memento as argument and resets its state 
+          i.e. `Workflow` with the state stored in memento 
+        - The caretaker e.g. `Command` in our case is responsible to hold this Memento object and pass to Originator to restore state
+    - ***Things to consider***
+        - Make sure the state is as minimal as possible and if large states are stored, maintain less history
+        - Memento should be inner class of Originator since it has to be encapsulated
+        - We must reset any other affected objects apart from Originator, simply resetting the originator is not enough
+        - We can create a Memento that only stores delta instead of full snapshot if we know sequence in which states can change,
+          e.g. in Command pattern usage, we know which commands can be executed, thus store only delta
+        - Storing state if Originator state depends on other objects also is difficult.
+        - Restoring state from Memento is also difficult if we have multiple object dependency
+    - ***Examples***
+        - `javax.swing.text.JTextComponent` and its child classes like `JTextField`, `JTextArea` etc.
+    - ***UML***
+      ![Memento Pattern](./img/memento_pattern_uml.png "Memento Pattern")
+   - **Difference from Command**
+       - Memento seals state(mandatory) for everyone except the Originator, 
+         we need to store it so that we can reset state, else it is of no use
+       - Commands are typically immutable but theirs states are often readable, 
+         commands can be created and executed, but it is optional to store them 
