@@ -573,4 +573,42 @@ Client interacts with just the facade to get the same result
        - Memento seals state(mandatory) for everyone except the Originator, 
          we need to store it so that we can reset state, else it is of no use
        - Commands are typically immutable but theirs states are often readable, 
-         commands can be created and executed, but it is optional to store them 
+         commands can be created and executed, but it is optional to store them
+7. **Observer Pattern**  
+    Use when we have an object i.e. `Observable/ Subject` whose state change should be notified to many objects i.e. `Observers`  
+    Also called as pub-sub or publisher-subscriber pattern.
+    - ***Steps to implement***
+        - Define an interface which will be implemented by all listeners i.e. `Observer`
+        - If we can have multiple publisher or subject, we need to define an interface i.e. `Observable`.  
+          If we have a single `Observable`, we can directly add methods within the class without defining interface
+        - We should have methods to attach to, detach from an observable class instance, 
+          and also a notification method which will notify all the listeners when the state of observable changes
+        - Also, the Observable should have methods to query the state, in case some object needs the updated value/ state
+        - The observable has update method which is called by notification method of Observable.  
+          This can accept the reference of Observable or the updated value/ state depending on our implementation
+    - ***Things to consider***
+        - If the observer updates the state of observable on receiving notification, it may cause a loop if not properly handled.  
+          e.g. PriceObserver which can give discount on Order object if total is greater that certain amount thus, updating state
+        - Since observer is capable of listening to changes in multiple observables
+        - The update method of observer should not be slow or should not block the notification method
+        - We can either have single attach method or have multiple attach method per state of Observable
+        - We can pass on the notification call to client if we want to reduce number of notification being sent out.  
+          The client can call the notification method once it is done updating required state, 
+          but this can lead to issues like forgetting to call notification method by client. 
+        - We have no control over number of notification that are sent, since every update may trigger notification
+        - If the update method of Observer is slow, it will make the state update slow and costly
+        - If we do not pass the updated value to update method, it will cause lots of call back to Observable
+    - ***Examples***
+        - `java.util.Observer` interface and `java.util.Observable`
+        - In Java Servlet Application `HttpSessionListener` and `ServletRequestListner` are registered with `ServletContext` 
+          and are notified when certain event occurs like creation of request. 
+        - Spring support Observer pattern through `ApplicationListener` interface
+    - ***UML***
+      ![Observer Pattern](./img/observer_pattern_uml.png "Observer Pattern")
+    - **Difference from Mediator**
+        - Both are used for communication between objects
+        - Observer is suitable for one-to-many i.e. 1 Observable notifies many Observer and is simple as publish-subscribe
+          It is more generic, single interface serves all Observers
+        - Mediator is suitable for many-to-many i.e. 1 object notified many others, 
+          and meanwhile it may also listen to changes to many other objects like Slider and TextBox communication 
+            There is tight coupling with the object to notify and get notification from
